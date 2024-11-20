@@ -59,10 +59,10 @@ def calculate_precision_recall_full(features_1, features_2, neighborhood=3, batc
     dist_nn_2 = calc_cdist_full(features_2, features_2, batch_size).kthvalue(neighborhood + 1).values
     dist_2_1 = calc_cdist_full(features_2, features_1, batch_size)
     dist_1_2 = dist_2_1.T
-    # Precision
-    precision = (dist_2_1 <= dist_nn_1).any(dim=1).float().mean().item()
     # Recall
-    recall = (dist_1_2 <= dist_nn_2).any(dim=1).float().mean().item()
+    recall = (dist_2_1 <= dist_nn_1).any(dim=1).float().mean().item()
+    # Precision
+    precision = (dist_1_2 <= dist_nn_2).any(dim=1).float().mean().item()
     return precision, recall
 
 
